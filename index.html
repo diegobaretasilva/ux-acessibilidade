@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Segurança Digital para a Terceira Idade</title>
+  <style>
+    /* Reset básico e variáveis de acessibilidade */
+    :root {
+      --bg-color: #f4f7f6;
+      --card-bg: #ffffff;
+      --text-color: #1a1a1a;
+      --primary-color: #004b87;
+      --primary-hover: #003366;
+      --accent-color: #c02626;
+      --accent-hover: #991b1b;
+      --warning-bg: #fff3cd;
+      --warning-border: #ffeba2;
+      --border-color: #cccccc;
+      --focus-outline: #ff9900;
+      --font-scale: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      font-size: calc(18px * var(--font-scale));
+      padding-bottom: 40px;
+    }
+
+    /* Acessibilidade: Foco visível para navegação por teclado */
+    a:focus, button:focus, input:focus, label:focus {
+      outline: 4px solid var(--focus-outline);
+      outline-offset: 3px;
+    }
+
+    /* Cabeçalho */
+    header {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 24px 16px;
+      text-align: center;
+      border-bottom: 5px solid #002244;
+    }
+
+    header h1 {
+      font-size: calc(28px * var(--font-scale));
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: calc(20px * var(--font-scale));
+    }
+
+    /* Barra de Acessibilidade */
+    .accessibility-bar {
+      background-color: #e5ecef;
+      padding: 12px;
+      text-align: center;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .accessibility-bar span {
+      font-weight: bold;
+      font-size: calc(18px * var(--font-scale));
+    }
+
+    /* Controle de Zoom via CSS/HTML */
+    #zoom-toggle {
+      display: none;
+    }
+
+    #zoom-toggle:checked ~ main {
+      --font-scale: 1.25;
+    }
+
+    .btn-zoom {
+      display: inline-block;
+      background-color: #ffffff;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-zoom:hover {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    /* Layout principal */
+    main {
+      max-width: 900px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    /* Banner Inicial de Boas-Vindas */
+    .hero-banner {
+      background: linear-gradient(135deg, #003366 0%, #0059b3 100%);
+      color: #ffffff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      text-align: center;
+      margin-bottom: 32px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .hero-banner h2 {
+      font-size: calc(26px * var(--font-scale));
+      margin-bottom: 12px;
+    }
+
+    .hero-banner p {
+      font-size: calc(20px * var(--font-scale));
+      margin-bottom: 24px;
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Botão de Ajuda em Destaque no Banner */
+    .btn-help-hero {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: #ffffff;
+      font-size: calc(22px * var(--font-scale));
+      font-weight: bold;
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 3px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .btn-help-hero:hover {
+      background-color: var(--accent-hover);
+      transform: scale(1.03);
+    }
+
+    /* Menu de Navegação */
+    nav {
+      margin-bottom: 32px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      display: block;
+      background-color: #ffffff;
+      color: var(--primary-color);
+      text-decoration: none;
+      padding: 14px 20px;
+      border: 2px solid var(--primary-color);
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: calc(18px * var(--font-scale));
+      text-align: center;
+    }
+
+    .nav-link:hover {
+      background-color: var(--primary-color);
+      color: #ffffff;
+    }
+
+    /* Títulos das Seções */
+    .section-title {
+      font-size: calc(24px * var(--font-scale));
+      color: var(--primary-color);
+      margin-top: 40px;
+      margin-bottom: 20px;
+      border-bottom: 4px solid var(--primary-color);
+      padding-bottom: 8px;
+    }
+
+    /* Cartões */
+    .card {
+      background-color: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-left: 8px solid var(--primary-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .card.alert-card {
+      border-left-color: var(--accent-color);
+      background-color: #fff9f9;
+    }
+
+    .card.law-card {
+      border-left-color: #2e7d32;
+      background-color: #f4fbf4;
+    }
+
+    .card h3 {
+      font-size: calc(22px * var(--font-scale));
+      margin-bottom: 14px;
+      color: #111111;
+    }
+
+    .card p {
+      margin-bottom: 12px;
+    }
+
+    .card ul {
+      margin-left: 24px;
+      margin-bottom: 14px;
+    }
+
+    .card li {
+      margin-bottom: 10px;
+    }
+
+    /* Elementos visuais de Sinais de Alerta (Golpes) */
+    .warning-signal {
+      background-color: #fff3cd;
+      border: 2px solid #ffeba2;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      color: #664d03;
+    }
+
+    .warning-signal strong {
+      color: #842029;
+      display: block;
+      margin-bottom: 6px;
+      font-size: calc(20px * var(--font-scale));
+    }
+
+    /* Caixa de Dica em Destaque */
+    .highlight-box {
+      background-color: #e8f4fc;
+      border: 2px dashed var(--primary-color);
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 16px;
+      font-weight: 500;
+    }
+
+    /* Seção do Botão de Ajuda de Emergência no Final */
+    .emergency-card {
+      background-color: #003366;
+      color: #ffffff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 48px;
+      border: 4px solid var(--accent-color);
+    }
+
+    .emergency-card h2 {
+      font-size: calc(26px * var(--font-scale));
+      margin-bottom: 16px;
+    }
+
+    .emergency-card p {
+      font-size: calc(20px * var(--font-scale));
+      margin-bottom: 16px;
+    }
+
+    .emergency-list {
+      text-align: left;
+      display: inline-block;
+      margin: 16px 0;
+    }
+
+    .emergency-list li {
+      margin-bottom: 12px;
+      font-size: calc(19px * var(--font-scale));
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      padding: 24px;
+      margin-top: 48px;
+      background-color: #e5ecef;
+      border-top: 2px solid var(--border-color);
+      font-size: calc(16px * var(--font-scale));
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .nav-list {
+        flex-direction: column;
+      }
+      
+      .nav-link {
+        width: 100%;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .btn-help-hero {
+        width: 100%;
+        padding: 16px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controle de zoom de texto sem JavaScript -->
+  <input type="checkbox" id="zoom-toggle">
+
+  <header>
+    <h1>Guia de Segurança Digital</h1>
+    <p>Sua navegação na internet com tranquilidade, proteção e direitos garantidos</p>
+  </header>
+
+  <!-- Barra de Acessibilidade -->
+  <div class="accessibility-bar" aria-label="Opções de Acessibilidade">
+    <span>Acessibilidade:</span>
+    <label for="zoom-toggle" class="btn-zoom" tabindex="0" role="button">
+      🔍 Aumentar / Diminuir Texto
+    </label>
+  </div>
+
+  <main>
+
+    <!-- BANNER INICIAL COM BOTÃO DE AJUDA -->
+    <section class="hero-banner" aria-label="Apresentação do Guia">
+      <h2>Bem-vindo ao seu Portal de Proteção Digital!</h2>
+      <p>A internet é uma excelente ferramenta para falar com a família, ver notícias e pagar contas. Aprenda a navegar com total segurança e sem medo.</p>
+      
+      <a href="#ajuda-emergencia" class="btn-help-hero" role="button">
+        🆘 Precisa de Ajuda ou Suspeita de Golpe? Clique Aqui!
+      </a>
+    </section>
+
+    <!-- MENU DE NAVEGAÇÃO RÁPIDA -->
+    <nav aria-label="Navegação do Guia">
+      <ul class="nav-list">
+        <li><a href="#dicas-seguranca" class="nav-link">🛡️ Dicas de Segurança</a></li>
+        <li><a href="#identificar-golpes" class="nav-link">🔍 Como Identificar Golpes</a></li>
+        <li><a href="#direitos-internet" class="nav-link">⚖️ Seus Direitos</a></li>
+        <li><a href="#senhas-whatsapp" class="nav-link">🔑 Senhas e WhatsApp</a></li>
+      </ul>
+    </nav>
+
+    <!-- SEÇÃO 1: DICAS IMPORTANTES DE SEGURANÇA DIGITAL -->
+    <section id="dicas-seguranca">
+      <h2 class="section-title">🛡️ Dicas Importantes de Segurança Digital</h2>
+
+      <article class="card">
+        <h3>Hábitos simples que protegem o seu dia a dia</h3>
+        <p>Proteger o seu celular ou computador é parecido com trancar a porta da sua casa antes de dormir. Siga estas regras essenciais:</p>
+
+        <ul>
+          <li><strong>Mantenha o celular atualizado:</strong> Quando o aparelho pedir para atualizar, aceite. As atualizações corrigem falhas de segurança.</li>
+          <li><strong>Não clique em links desconhecidos:</strong> Recebeu um link por SMS, WhatsApp ou e-mail de alguém que não conhece? Não abra.</li>
+          <li><strong>Baixe aplicativos apenas de lojas oficiais:</strong> Utilize somente a <em>Play Store</em> (em celulares Android) ou a <em>App Store</em> (em iPhones).</li>
+          <li><strong>Cuidado com redes Wi-Fi públicas:</strong> Evite acessar o aplicativo do seu banco conectado ao Wi-Fi de praças, ônibus ou locais públicos sem senha.</li>
+        </ul>
+
+        <div class="highlight-box">
+          💡 <strong>Dica de Ouro:</strong> Sempre que tiver dúvida sobre uma mensagem no celular, feche a tela e pergunte para alguém de sua confiança antes de clicar.
+        </div>
+      </article>
+    </section>
+
+    <!-- SEÇÃO 2: COMO IDENTIFICAR POSSÍVEIS GOLPES NO DIA A DIA -->
+    <section id="identificar-golpes">
+      <h2 class="section-title">🔍 Como Identificar Golpes no Dia a Dia</h2>
+
+      <article class="card alert-card">
+        <h3>Preste atenção nos sinais de alerta!</h3>
+        <p>Os golpistas costumam usar técnicas de pressão emocional para fazer as pessoas agirem sem pensar. Fique atento a estes padrões:</p>
+
+        <div class="warning-signal">
+          <strong>🚨 Sinal 1: Urgência Extrema ou Ameaças</strong>
+          Mensagens do tipo: "Sua conta será bloqueada hoje!", "Você tem 1 hora para pagar uma dívida" ou "Seu familiar foi sequestrado".<br>
+          <em>A verdade:</em> Bancos e órgãos oficiais nunca exigem pagamentos imediatos com ameaças pelo WhatsApp.
+        </div>
+
+        <div class="warning-signal">
+          <strong>🚨 Sinal 2: Prêmios ou Dinheiro "Fácil"</strong>
+          Mensagens dizendo que você ganhou um sorteio do qual nunca participou ou que tem um resgate alto de aposentadoria para receber.<br>
+          <em>A verdade:</em> Ninguém dá dinheiro de graça na internet. Se pedirem para pagar uma taxa para liberar um prêmio, é golpe!
+        </div>
+
+        <div class="warning-signal">
+          <strong>🚨 Sinal 3: O Golpe do "Novo Número de Telefone"</strong>
+          Alguém usa a foto de um filho ou neto no WhatsApp dizendo: "Troquei de número, guarda esse novo aí" e logo depois pede um PIX urgente.<br>
+          <em>A verdade:</em> Ligue para o número antigo do seu parente ou faça uma chamada de vídeo para confirmar o rosto dele antes de transferir qualquer valor.
+        </div>
+      </article>
+    </section>
+
+    <!-- SEÇÃO 3: DIREITOS NA INTERNET E GARANTIAS LEGAIS -->
+    <section id="direitos-internet">
+      <h2 class="section-title">⚖️ Seus Direitos no Ambiente Digital</h2>
+
+      <article class="card law-card">
+        <h3>O que a lei diz para proteger você?</h3>
+        <p>A internet não é uma "terra sem leis". A legislação brasileira garante proteção especial aos seus dados e transações:</p>
+
+        <ul>
+          <li><strong>Proteção dos seus Dados (LGPD):</strong> Nenhuma empresa ou banco pode vender ou compartilhar seu CPF, telefone e endereço sem o seu consentimento explícito.</li>
+          <li><strong>Direito ao Ressarcimento Bancário:</strong> Se você for vítima de uma fraude bancária ou PIX não autorizado por falha na segurança do banco, você tem direito de solicitar a devolução do dinheiro junto à instituição financeira.</li>
+          <li><strong>Prioridade no Atendimento:</strong> Pelo Estatuto da Pessoa Idosa, você tem direito a atendimento prioritário e humanizado ao resolver problemas de segurança ou golpes em bancos e delegacias.</li>
+          <li><strong>Cancelamento de Compras (Direito de Arrependimento):</strong> Comprou algo pela internet e se arrependeu? O Código de Defesa do Consumidor garante até 7 dias após o recebimento para cancelar e receber o dinheiro de volta.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- SEÇÃO 4: SENHAS E WHATSAPP -->
+    <section id="senhas-whatsapp">
+      <h2 class="section-title">🔑 Cuidados com Senhas e WhatsApp</h2>
+
+      <article class="card">
+        <h3>Protegendo suas contas pessoais</h3>
+        <p>Dicas simples para manter seu WhatsApp e suas senhas bem guardados:</p>
+
+        <ul>
+          <li><strong>Ative a Confirmação em Duas Etapas no WhatsApp:</strong> É uma senha de 6 dígitos que o próprio aplicativo pede de tempos em tempos. Isso impede que hackers roubem sua conta.</li>
+          <li><strong>Senhas Fortes e Diferentes:</strong> Não use a mesma senha para o banco, e-mail e redes sociais.</li>
+          <li><strong>Nunca digite senhas em chamadas de vídeo:</strong> Atendentes reais de bancos jamais vão pedir para ver você digitando sua senha.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- BOTÃO DE AJUDA / SEÇÃO DE EMERGÊNCIA EM DESTAQUE -->
+    <section id="ajuda-emergencia" class="emergency-card">
+      <h2>🚨 Acha que caiu em um golpe ou está com dúvidas?</h2>
+      <p>Não se envergonhe! Qualquer pessoa pode ser vítima de golpistas. Siga estes passos imediatamente:</p>
+
+      <ul class="emergency-list">
+        <li><strong>1. Ligue para o seu banco:</strong> Utilize o número oficial impresso no verso do seu cartão magnético para bloquear senhas e cartões.</li>
+        <li><strong>2. Avise um familiar de confiança:</strong> Peça ajuda para checar suas contas e contatar as autoridades.</li>
+        <li><strong>3. Faça um B.O. (Boletim de Ocorrência):</strong> Pode ser feito na delegacia mais próxima ou pela internet na Polícia Civil da sua região.</li>
+        <li><strong>4. Ligue para o Disque 100:</strong> Canal gratuito que protege os direitos da pessoa idosa.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Guia de Acessibilidade e Segurança Digital &copy; 2026</p>
+    <p>Desenvolvido de forma acessível utilizando apenas HTML e CSS.</p>
+  </footer>
+
+</body>
+</html>
